@@ -1,1 +1,1 @@
-web: gunicorn collaborator_app.wsgi --log-file -
+web: gunicorn collaborator-project.wsgi --log-file -
