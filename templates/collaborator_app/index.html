@@ -1,0 +1,38 @@
+{% include 'collaborator_app/base.html' %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'collaborator_app/index.css' %}">
+{% block body %}
+    {% if request.user.is_authenticated %}
+      <div class="jumbotron" style="height: 100vh;">
+        <div class="container text-center">
+          <h1 style="font-weight: bold;">Welcome {{request.user.username}}!</h1>
+          <div class="row">
+            <div class="col-sm p-5">
+              <div class="info text-left bg-white p-5 rounded">
+                <h3 class="text-center mb-3">Account Information</h3>
+                <p>First Name: {{request.user.first_name}}</p>
+                <p>Last Name: {{request.user.last_name}}</p>
+                <p>Email: {{request.user.email}}</p>
+                <p>Username: {{request.user.username}}</p>
+              </div>
+            </div>
+            <div class="col-sm p-5">
+              <div class="projects bg-white p-5 rounded">
+                <h3 class="text-center mb-3">Your Projects</h3>
+                <ul class="list-group">
+                  {% for project in projects %}
+                    <li class="list-group-item">
+                      <a href="/project/{{project.project_id}}">{{project}}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+                <a href="/create-project/" class="btn btn-primary mt-3">Create New Project</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+    <h1 class="display-1 rounded p-4 d-inline-block centered">Collaborate Now.</h1>
+    {% endif %}
+    {% endblock %}

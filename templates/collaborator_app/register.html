@@ -1,0 +1,15 @@
+{% include 'collaborator_app/base.html' %}
+{% load staticfiles %}
+<title>Register</title>
+<link rel="stylesheet" href="{% static 'collaborator_app/login_register.css' %}">
+{% block body %}
+  <div class="container float-container">
+    <form class="text-center" method="post">
+      <h1 class="display-1">Register</h1>
+      {% csrf_token %}
+      {{user_form}}
+      <input class="btn btn-primary" type="submit" value="Register">
+      <p class="lead">Already have an account? <a href="/login/">Login Here</a></p>
+    </form>
+  </div>
+{% endblock %}

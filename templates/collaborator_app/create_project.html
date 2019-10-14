@@ -1,0 +1,47 @@
+{% include 'collaborator_app/base.html' %}
+{% load staticfiles %}
+<title>Create Project</title>
+<link rel="stylesheet" href="{% static 'collaborator_app/login_register.css' %}">
+{% block body %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success alert-dismissible mb-0 text-left">
+      <button class="close" type="button" data-dismiss="alert">
+          <span>&times;</span>
+      </button>
+      <strong>{{ message|escape }}</strong>
+    </div>
+  {% endfor %}
+{% endif %}
+  <div class="container float-container text-center">
+    {% if created %}
+      <h1 class="display-1">Project Created!</h1>
+      <p class="lead">Your code: {{code}}</p>
+      <p class="lead">Go to project: <a href={{link}}>{{link}}</a></p>
+    {% else %}
+      <h1>Create Project</h1>
+      <button style="transform: translate(214px, -84px)" onclick="duplicate()" class="btn btn-primary">Add Member</button>
+      <form method="post">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="name" placeholder="Project Name">
+        <input class="form-control" type="text" name="description" placeholder="Project Description">
+        <div class="member-inputs">
+          <input class="form-control" type="text" name="member0" placeholder="Member Username">
+        </div>
+        <input class="btn btn-primary mt-3" type="submit" value="Create">
+      </form>
+    {% endif %}
+  </div>
+  <script>
+    counter = 1
+    function duplicate() {
+      node = document.createElement("input")
+      node.type = "text"
+      node.placeholder = "Member Username"
+      node.name = "member" + counter
+      node.className = "form-control"
+      counter = counter + 1
+      document.querySelector(".member-inputs").appendChild(node)
+    }
+  </script>
+{% endblock %}
