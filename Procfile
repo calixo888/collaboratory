@@ -1,2 +1,1 @@
-web: gunicorn bootcamp.wsgi --log-file -
-
+web: gunicorn collaborator_app.wsgi --log-file -
